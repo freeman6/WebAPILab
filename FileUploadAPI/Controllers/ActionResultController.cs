@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web.Http;
+using FileUploadAPI.Models;
 
 namespace FileUploadAPI.Controllers
 {
@@ -35,6 +36,7 @@ namespace FileUploadAPI.Controllers
         /// 此情境適用於上傳及下載檔案情境
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public HttpResponseMessage Export()
         {
             var fileName = "lab.xls";
@@ -65,6 +67,7 @@ namespace FileUploadAPI.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [HttpGet]
         public IHttpActionResult NewAPIResponse(int id)
         {
             var status = new string[] { "value1", "value2" };
@@ -85,6 +88,7 @@ namespace FileUploadAPI.Controllers
         /// 案例四：在使用 IHttpActionResult 為回傳型別的狀況下，強制使用 HttpResponseMessage 來轉型為 IHttpActionResult。
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public IHttpActionResult NewAPIResponse2()
         {
             IHttpActionResult response;
@@ -93,6 +97,86 @@ namespace FileUploadAPI.Controllers
             responseMsg.Headers.Location = new Uri("http://xxxxxx.blah");
             response = ResponseMessage(responseMsg);
             return response;
+        }
+
+        /// <summary>
+        /// 案例五：無回傳值(void)
+        /// 其返回的 HttpStatus Code 為 (204 No Content)
+        /// </summary>
+        [HttpGet]
+        public void Get()
+        {
+            int a = 1;
+            int b = 2;
+            int c = a + b;
+        }
+
+        /// <summary>
+        /// 案例六：回傳 Json Result
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IHttpActionResult GetJson()
+        {
+            var result = new List<UserInfo>();
+            result.Add(new UserInfo { Name = "reco", age = 22 });
+            result.Add(new UserInfo { Name = "freeman6", age = 23 });
+            return Json<List<UserInfo>>(result);
+        }
+
+        /// <summary>
+        /// 案例七：使用 Redirect 作為回傳狀態
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IHttpActionResult GetRedirect()
+        {
+            return Redirect("https://localhost:44355/API/ActionResult/GetRedirect2");
+        }
+        [HttpGet]
+        public IHttpActionResult GetRedirect2()
+        {
+            string result = "請求成功！";
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// 案例八：使用自定義型別來回傳，其 HttpStatus Code 統一預設為 (200 OK)
+        /// </summary>
+        /// <returns></returns>
+        public object GetCustomerTypeAction()
+        {
+            var result = new List<UserInfo>();
+            result.Add(new UserInfo { Name = "reco", age = 22 });
+            result.Add(new UserInfo { Name = "freeman6", age = 23 });
+            return result;
+        }
+
+        /// <summary>
+        /// 回傳 BadRequest (400) 的錯誤
+        /// </summary>
+        /// <returns></returns>
+        public IHttpActionResult GetBadRequest()
+        { 
+            return BadRequest();
+        }
+
+        /// <summary>
+        /// 回傳 NotFound (404) 的錯誤
+        /// </summary>
+        /// <returns></returns>
+        public IHttpActionResult GetNotFound()
+        { 
+            return NotFound();
+        }
+
+        /// <summary>
+        /// 回傳 HttpStatus Code (OK 200) 及回傳值。
+        /// </summary>
+        /// <returns></returns>
+        public IHttpActionResult GetContent()
+        {
+            return Content<string>(HttpStatusCode.OK, "OK");
         }
     }
 }
