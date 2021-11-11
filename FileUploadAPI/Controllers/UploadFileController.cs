@@ -29,7 +29,7 @@ namespace FileUploadAPI.Controllers
                 foreach (string item in httpRequest.Files)
                 {
                     var file = httpRequest.Files[item];
-                    var filePath = HttpContext.Current.Server.MapPath($"~/{file.FileName}");
+                    var filePath = HttpContext.Current.Server.MapPath($"~/App_Data/{file.FileName}");
                     file.SaveAs(filePath);
                     files.Add(filePath);
                 }
