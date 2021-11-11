@@ -76,10 +76,10 @@ namespace FileUploadAPI.Controllers
                     //fileinfo.Name 上傳後的文件路徑不含副檔名
                     //修改文件名加上副檔名
 
-                    string newFileName = "test" + i + fileExt;
+                    string newFileName = filename;
                     i++;
                     //最後保存文件路徑
-                    string saveUrl = System.IO.Path.Combine(root, newFileName);
+                    string saveUrl = System.IO.Path.Combine(root, filename);
                     fileInfo.MoveTo(saveUrl);
 
 
