@@ -70,8 +70,9 @@ namespace FileUploadAPI.Controllers
         [HttpGet]
         public IHttpActionResult NewAPIResponse(int id)
         {
-            var status = new string[] { "value1", "value2" };
-            if (status.Count() > 0)
+            //var status = new string[] { "value1", "value2" };
+            var status = new string[] { };
+            if (status.Count() >0)
 
             {
                 //return new HttpResponseMessage(HttpStatusCode.OK);
@@ -94,7 +95,7 @@ namespace FileUploadAPI.Controllers
             IHttpActionResult response;
             //we want a 303 with the ability to set location
             HttpResponseMessage responseMsg = new HttpResponseMessage(HttpStatusCode.RedirectMethod);
-            responseMsg.Headers.Location = new Uri("http://xxxxxx.blah");
+            responseMsg.Headers.Location = new Uri("https://mail.google.com/");
             response = ResponseMessage(responseMsg);
             return response;
         }

@@ -68,6 +68,10 @@ namespace FileUploadAPI.Controllers
             return ResponseMessage(response);
         }
 
+        /// <summary>
+        /// 使用 HttpClient 下載檔案(1)
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IHttpActionResult DownloadFile04()
         {
@@ -77,7 +81,7 @@ namespace FileUploadAPI.Controllers
             HttpClient client = new HttpClient();
             var result = client.GetAsync(url).Result;
             var response = new HttpResponseMessage(HttpStatusCode.OK);
-            if (response.IsSuccessStatusCode)
+            if (CheckUrlFileIsExists(url) == true)
             {
                 var content = result.Content.ReadAsByteArrayAsync().Result;
                 response.Content = new ByteArrayContent(content);
@@ -92,5 +96,65 @@ namespace FileUploadAPI.Controllers
             }
 
         }
+
+        /// <summary>
+        /// 使用 HttpClient 下載檔案(2) - 非同步方法
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IHttpActionResult> DownloadFile05()
+        {
+            var fileName = "lab.xls";
+            string filePath = HttpContext.Current.Server.MapPath($@"~/Files/{fileName}");
+            var url = "https://localhost:44355/Files/lab6.xls";
+            HttpClient client = new HttpClient();
+            var result = await client.GetAsync(url);
+            var response = new HttpResponseMessage(HttpStatusCode.OK);
+            if (CheckUrlFileIsExists(url) == true)
+            { 
+                var content = await result.Content.ReadAsStreamAsync();
+                response.Content = new StreamContent(content);
+                response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
+                response.Content.Headers.ContentDisposition.FileName = HttpUtility.UrlPathEncode(Path.GetFileName(url));
+                response.Content.Headers.ContentLength = content.Length; //告知瀏覽器下載長度
+                return ResponseMessage(response);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+        
+        /// <summary>
+        /// 判斷 url 檔案是否存在
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        private bool CheckUrlFileIsExists(string url)
+        {
+            var result = true;
+            HttpWebResponse response = null;
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            request.Method = "HEAD";
+
+            try
+            {
+                response = (HttpWebResponse)request.GetResponse();
+            }
+            catch (WebException ex)
+            {
+                result = false;
+            }
+            finally
+            {
+                if (response != null)
+                {
+                    response.Close();
+                }
+            }
+
+            return result;
+        }
+
     }
 }
