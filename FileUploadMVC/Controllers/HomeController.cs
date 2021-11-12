@@ -26,5 +26,9 @@ namespace FileUploadMVC.Controllers
 
             return View();
         }
+        public ActionResult Download()
+        {
+            return View();
+        }
     }
 }

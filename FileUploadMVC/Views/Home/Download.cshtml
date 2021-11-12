@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "Download Lab";
+}
+
+<div class="jumbotron">
+    <h1>ASP.NET</h1>
+    <p class="lead">ASP.NET WebAPI DownLoad</p>
+    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div>
+        <form name="form1" method="get" action="https://localhost:44355/api/Download/DownloadFile02">
+            <div>
+                <input type="submit" value="相對路徑方式下載檔案" />
+            </div>
+        </form>
+        <form name="form2" method="get" action="https://localhost:44355/api/Download/DownloadFile03">
+            <div>
+                <input type="submit" value="實體路徑方式下載檔案" />
+            </div>
+        </form>
+        <form name="form3" method="get" action="https://localhost:44355/api/Download/DownloadFile01">
+            <div>
+                <input type="submit" value="DownloadByCustomActionResult" />
+            </div>
+        </form>
+        <form name="form4" method="get" action="https://localhost:44355/api/Download/DownloadFile04">
+            <div>
+                <input type="submit" value="下載遠方主機上的檔案" />
+            </div>
+        </form>
+    </div>
+</div>
