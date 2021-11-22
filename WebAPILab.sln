@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileUploadAPI", "FileUpload
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileUploadMVC", "FileUploadMVC\FileUploadMVC.csproj", "{7A035922-6D72-40A4-8A5E-FD8DEA547E9F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileUploadWebForm", "FileUploadWebForm\FileUploadWebForm.csproj", "{6AB3FA1A-739E-4D3F-91E3-0A9DAF9C7679}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7A035922-6D72-40A4-8A5E-FD8DEA547E9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A035922-6D72-40A4-8A5E-FD8DEA547E9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A035922-6D72-40A4-8A5E-FD8DEA547E9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AB3FA1A-739E-4D3F-91E3-0A9DAF9C7679}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AB3FA1A-739E-4D3F-91E3-0A9DAF9C7679}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AB3FA1A-739E-4D3F-91E3-0A9DAF9C7679}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AB3FA1A-739E-4D3F-91E3-0A9DAF9C7679}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

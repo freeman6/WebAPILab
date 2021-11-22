@@ -27,6 +27,7 @@ namespace FileUploadMVC.Controllers
 
             return View();
         }
+
         public ActionResult Download()
         {
             return View();
@@ -45,16 +46,44 @@ namespace FileUploadMVC.Controllers
             return File(stream, "application/vnd.ms-excel", fileName);
         }
 
+        /// <summary>
+        /// 在 MVC 裡上傳檔案的範例
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult Upload(HttpPostedFileBase file)
+        public ActionResult SingleFileUpload(HttpPostedFileBase file)
         {
             if (file != null)
             {
-                //可以在這邊加入上傳檔案的上線
-                if (file.ContentLength > 0) 
+                //可以在這邊加入上傳檔案的上限
+                if (file.ContentLength > 0)
                 {
-                    string fileName = Path.Combine(Server.MapPath("~/"), file.FileName);
+                    string fileName = Path.Combine(Server.MapPath("~/UploadedFiles/"), file.FileName);
                     file.SaveAs(fileName);
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
+        /// <summary>
+        /// 在 MVC 裡上傳檔案的範例
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult MultiFileUpload(HttpPostedFileBase[] files)
+        {
+            if (files.Count() >= 1)
+            {
+                foreach (var file in files)
+                {
+                    //可以在這邊加入上傳檔案的上限
+                    if (file.ContentLength > 0)
+                    {
+                        string fileName = Path.Combine(Server.MapPath("~/UploadedFiles/"), file.FileName);
+                        file.SaveAs(fileName);
+                    }
                 }
             }
             return RedirectToAction("Index");

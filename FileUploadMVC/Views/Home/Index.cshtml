@@ -21,13 +21,26 @@
                 <input type="submit" value="Upload" />
             </div>
         </form>
-        <form name="form2" method="post" action="https://localhost:44356/Home/Upload" enctype="multipart/form-data">
+        <form name="form2" method="post" action="https://localhost:44356/Home/SingleFileUpload" enctype="multipart/form-data">
             <div class="form-horizontal">
                 <div>
                     <label>
                         Brows File
                     </label>
-                    <input name="myFile" type="file" />
+                    <input name="file" type="file" />
+                </div>
+                <div>
+                    <input type="submit" value="Upload" />
+                </div>
+            </div>
+        </form>
+        <form name="form2" method="post" action="https://localhost:44356/Home/MultiFileUpload" enctype="multipart/form-data">
+            <div class="form-horizontal">
+                <div>
+                    <label>
+                        Brows File
+                    </label>
+                    <input name="files" multiple="multiple" type="file" />
                 </div>
                 <div>
                     <input type="submit" value="Upload" />

@@ -24,6 +24,8 @@ namespace FileUploadAPI.Controllers
         {
             var fileName = "lab.xls";
             string filePath = HttpContext.Current.Server.MapPath($@"~/Files/{fileName}");
+            var result = new FileResult(filePath);
+            
             return new FileResult(filePath);
         }
 
@@ -106,7 +108,7 @@ namespace FileUploadAPI.Controllers
         {
             var fileName = "lab.xls";
             string filePath = HttpContext.Current.Server.MapPath($@"~/Files/{fileName}");
-            var url = "https://localhost:44355/Files/lab6.xls";
+            var url = "https://localhost:44355/Files/lab.xls";
             HttpClient client = new HttpClient();
             var result = await client.GetAsync(url);
             var response = new HttpResponseMessage(HttpStatusCode.OK);
